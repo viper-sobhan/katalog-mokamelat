@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090a0d">
+<title>کاتالوگ محصولات</title>
+<style>
+:root{--bg:#090a0d;--panel:#15171c;--panel2:#20232a;--line:#343740;--text:#f7f5ef;--muted:#aaa9a3;--accent:#d8b56a;--accent-soft:#d8b56a22;--danger:#df6262}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 80% -10%,#4b3a1d55,transparent 42%),linear-gradient(155deg,#101115,#08090b 68%);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh;transition:background .25s}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
+header{padding:18px 16px;background:#090a0ded;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.head{max-width:980px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:11px}.mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#f0d28e,#9c7434);display:grid;place-items:center;color:#15120b;font-weight:900;font-size:21px;box-shadow:0 5px 24px #d8b56a25}
+h1{font-size:18px;margin:0 0 5px}.sub{font-size:11px;color:var(--muted)}
+.wrap{max-width:980px;margin:auto;padding:22px 16px 50px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.btn{padding:11px 14px;border-radius:12px;background:var(--panel2);color:var(--text);border:1px solid var(--line);font-size:13px}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-dark,var(--accent)));color:#17130a;font-weight:bold;border-color:var(--accent)}
+.btn.small{padding:8px 10px;font-size:12px}
+h2{font-size:17px;margin:8px 0 14px}.hint{font-size:12px;color:var(--muted);line-height:1.9;margin:0 0 16px}
+.homehero{border:1px solid #d8b56a55;border-radius:20px;padding:19px;margin-bottom:20px;background:linear-gradient(115deg,#292116,#111216 72%);position:relative;overflow:hidden}
+.homehero:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;border:1px solid #d8b56a33;left:-35px;top:-65px;box-shadow:0 0 0 18px #d8b56a0b,0 0 0 38px #d8b56a08}
+.homehero strong{font-size:19px;display:block;margin-bottom:7px}.homehero span{font-size:12px;color:#c6bda9;line-height:1.9}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tile{background:linear-gradient(145deg,#202126,#111216);border:1px solid var(--line);border-radius:18px;padding:18px;min-height:138px;text-align:right;color:var(--text);position:relative;overflow:hidden;transition:transform .15s,border-color .15s}
+.tile:active{transform:scale(.98)}.tile:after{content:"";position:absolute;width:105px;height:105px;border-radius:50%;background:var(--accent-soft);left:-25px;bottom:-35px}
+.tile .emoji{font-size:29px;margin-bottom:12px}.tile strong{display:block;font-size:16px}.tile span{font-size:11px;color:var(--muted);display:block;margin-top:7px}
+.topline{display:flex;align-items:center;gap:8px;margin-bottom:16px}.back{background:transparent;color:var(--accent);padding:7px 0;font-size:13px}
+.pill{font-size:11px;color:var(--accent);background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);border-radius:99px;padding:5px 9px}
+.brandlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.brand{background:linear-gradient(145deg,#1b1d23,#121318);border:1px solid var(--line);padding:16px;border-radius:14px;text-align:right;color:var(--text);font-weight:bold}
+.brand small{display:block;color:var(--muted);font-weight:normal;margin-top:6px}
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.product{background:linear-gradient(160deg,#1b1d23,#111216);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.photo{height:160px;background:linear-gradient(145deg,#272a30,#17191e);display:grid;place-items:center;color:var(--muted);font-size:12px}
+.photo img{width:100%;height:100%;object-fit:contain;background:#fff}
+.pbody{padding:12px}.pbody h3{font-size:14px;margin:0 0 8px;line-height:1.6}.meta{font-size:11px;color:var(--muted);line-height:1.9}.price{color:var(--accent);font-weight:bold;margin-top:9px;font-size:14px}
+.actions{display:flex;gap:6px;margin-top:10px}.actions button{flex:1}
+.search{width:100%;padding:12px 14px;border-radius:12px;background:var(--panel);border:1px solid var(--line);color:var(--text);margin-bottom:13px;outline:none}
+.empty{padding:25px;text-align:center;border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:13px;line-height:2}
+.modal{position:fixed;inset:0;background:#000b;display:none;align-items:flex-end;justify-content:center;z-index:20;padding:12px}
+.modal.show{display:flex}.sheet{width:min(100%,620px);max-height:92vh;overflow:auto;background:#15171c;border:1px solid var(--line);border-radius:20px;padding:18px}
+.sheet h2{margin-top:0}.field{margin:12px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px}
+.field input,.field select,.field textarea{width:100%;padding:12px;border-radius:10px;background:#0d0e12;color:var(--text);border:1px solid var(--line);outline:none}
+.field textarea{min-height:78px;resize:vertical}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.preview{width:100%;max-height:180px;object-fit:contain;background:#fff;border-radius:10px;display:none;margin-top:8px}
+.modalbuttons{display:flex;gap:8px;margin-top:16px}.modalbuttons button{flex:1}
+.detail{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.cartline{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.cartline img{width:64px;height:72px;object-fit:contain;background:#fff;border-radius:9px}.cartline h3{font-size:13px;margin:0 0 5px}.qtybox{display:flex;align-items:center;gap:9px;margin-top:9px}.qtybox button{width:29px;height:29px;border-radius:8px;background:var(--panel2);color:var(--text);border:1px solid var(--line)}.totalbox{margin-top:18px;padding:16px;border:1px solid var(--accent);border-radius:14px;background:var(--accent-soft);display:flex;justify-content:space-between;align-items:center;gap:10px}.totalbox strong{font-size:17px;color:var(--accent)}.detail img{width:100%;max-height:300px;object-fit:contain;background:white}.detailcontent{padding:18px}.detailcontent h2{margin-top:0}.detailrow{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.detailrow span:first-child{color:var(--muted)}
+footer{max-width:980px;margin:20px auto 0;padding:0 16px 28px;color:var(--muted);font-size:10px;line-height:1.9}
+body[data-cat="creatine"]{--accent:#ff5a52;--accent-dark:#bd252b;--accent-soft:#ff514522;--line:#493033;background:radial-gradient(ellipse at 85% 0%,#681d2450,transparent 43%),linear-gradient(155deg,#160d10,#08090b 70%)}
+body[data-cat="creatine"] header{border-bottom-color:#54282d}
+body[data-cat="creatine"] .mark{background:linear-gradient(135deg,#ff766c,#a51f29);color:#19090b}
+body[data-cat="creatine"] .homehero{border-color:#ff5a5260;background:linear-gradient(115deg,#351316,#111216 72%)}
+body[data-cat="protein"]{--accent:#dfbd76;--accent-dark:#9f793b;--accent-soft:#dfbd7622;--line:#49402e}
+body[data-cat="gainer"]{--accent:#ff655b;--accent-dark:#bd292f;--accent-soft:#ff655b22;--line:#493033;background:radial-gradient(ellipse at 85% 0%,#76201e45,transparent 43%),linear-gradient(155deg,#170e0e,#08090b 70%)}
+body[data-cat="gainer"] .mark{background:linear-gradient(135deg,#ff766c,#a51f29);color:#19090b}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}.brandlist{grid-template-columns:repeat(3,1fr)}.products{grid-template-columns:repeat(3,1fr)}.photo{height:190px}.modal{align-items:center}}
+@media(max-width:360px){.grid,.brandlist,.products{grid-template-columns:1fr}.photo{height:190px}.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="head"><div class="logo"><div class="mark">✦</div><div><h1>کاتالوگ مکمل‌ها</h1><div class="sub">راهنمای محصولات و برندها</div></div></div><div style="display:flex;gap:7px;align-items:center"><button class="btn small" onclick="openCart()">🛒 سبد خرید <span id="cartCount" class="pill" style="margin-right:4px">0</span></button><button class="btn small" onclick="goHome()">صفحه اول</button></div></div></header>
+<main class="wrap" id="app"></main>
+<footer>اطلاعات و عکس محصولات را خودتان اضافه و ویرایش کنید. اطلاعات این کاتالوگ روی همین مرورگر و همین دستگاه ذخیره می‌شود؛ برای انتقال به گوشی دیگر از «خروجی پشتیبان» استفاده کنید.</footer>
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="sheet" id="modalBody"></div></div>
+<script>
+const categories=[{id:'creatine',name:'کراتین‌ها',icon:'⚡'},{id:'protein',name:'پروتئین‌ها',icon:'🥛'},{id:'gainer',name:'گینرها',icon:'💪'}];
+const starterBrands={creatine:['Zoomad Labs','Optimum Nutrition (ON)','MuscleTech','Rule One'],protein:['Optimum Nutrition (ON)','Dymatize','MuscleTech','Rule One','BSN','Applied Nutrition'],gainer:['Optimum Nutrition (ON)','Mutant','MuscleTech','BSN','Dymatize']};
+let data={brands:starterBrands,products:[]};let cart={};let view={page:'home',category:null,brand:null,product:null};
+try{const saved=localStorage.getItem('supplementCatalogV1');if(saved){const parsed=JSON.parse(saved);if(parsed&&parsed.catalog&&parsed.catalog.brands&&parsed.catalog.products){data=parsed.catalog;cart=parsed.cart||{}}else if(parsed&&parsed.brands&&parsed.products){data=parsed}}const savedCart=localStorage.getItem('supplementCartV1');if(savedCart)cart=JSON.parse(savedCart)}catch(e){}
+function save(){try{localStorage.setItem('supplementCatalogV1',JSON.stringify(data));}catch(e){alert('فضای ذخیره‌سازی پر شده است. عکس کوچک‌تری انتخاب کنید یا از خروجی پشتیبان استفاده کنید.');}}
+function saveCart(){try{localStorage.setItem('supplementCartV1',JSON.stringify(cart));}catch(e){alert('سبد خرید ذخیره نشد.')}}
+function cartCount(){return Object.values(cart).reduce((a,n)=>a+Number(n||0),0)}
+function updateCartBadge(){let el=document.getElementById('cartCount');if(el)el.textContent=cartCount()}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function money(v){return v?Number(v).toLocaleString('en-US')+' تومان':'قیمت ثبت نشده';}
+function goHome(){view={page:'home',category:null,brand:null,product:null};render()}
+function render(){
+ document.body.dataset.cat = (view.page==='home'||view.page==='manageBrands') ? 'home' : (view.category||'home');
+ const app=document.getElementById('app');updateCartBadge();
+ if(view.page==='home'){app.innerHTML=`<div class="homehero"><strong>انتخاب هوشمندانه، معرفی حرفه‌ای</strong><span>کاتالوگ محصولات مکمل؛ برندها و مشخصات هر محصول را یک‌جا مشاهده و مدیریت کنید.</span></div><h2>دسته‌بندی محصولات</h2><p class="hint">برای مشاهده برندها، یکی از دسته‌های زیر را انتخاب کنید.</p><div class="grid">${categories.map(c=>`<button class="tile" onclick="openCategory('${c.id}')"><div class="emoji">${c.icon}</div><strong>${c.name}</strong><span>${data.products.filter(p=>p.category===c.id).length} محصول ثبت‌شده</span></button>`).join('')}</div>
+<div class="panel" style="margin-top:18px;padding:16px;border:1px solid #b58b35;border-radius:14px;background:#171717;color:#f4ead2">
+  <strong style="color:#e5bd62">انتقال اطلاعات بین گوشی و کامپیوتر</strong>
+  <p style="margin:8px 0 6px">۱) در دستگاه مبدأ، «خروجی پشتیبان» را بزن و فایل JSON را ذخیره کن.</p>
+  <p style="margin:6px 0">۲) فایل را با کابل، پیام‌رسان یا فضای ابری به دستگاه دیگر منتقل کن.</p>
+  <p style="margin:6px 0">۳) در دستگاه مقصد، «بازیابی پشتیبان» را بزن و همان فایل را انتخاب کن.</p>
+  <p style="margin:8px 0 0;color:#e7c879">توجه: بازیابی، اطلاعات فعلی کاتالوگ و سبد خرید همان دستگاه را با اطلاعات فایل جایگزین می‌کند. قبل از بازیابی، از اطلاعات فعلی هم پشتیبان بگیر.</p>
+</div>
+<div style="margin-top:20px" class="toolbar"><button class="btn primary" onclick="openProductForm()">＋ افزودن محصول</button><button class="btn" onclick="manageBrands()">مدیریت برندها</button><button class="btn" onclick="backup()">خروجی پشتیبان</button><button class="btn" onclick="document.getElementById('restoreFile').click()">بازیابی پشتیبان</button><input id="restoreFile" type="file" accept="application/json" hidden onchange="restore(event)"></div>`;return}
+ if(view.page==='brands'){let c=categories.find(x=>x.id===view.category);app.innerHTML=`<div class="topline"><button class="back" onclick="goHome()">← صفحه اول</button><span class="pill">${c.name}</span></div><h2>انتخاب برند</h2><div class="brandlist">${(data.brands[view.category]||[]).map(b=>`<button class="brand" onclick="openBrand('${encodeURIComponent(b)}')">${esc(b)}<small>${data.products.filter(p=>p.category===view.category&&p.brand===b).length} محصول</small></button>`).join('')}</div><div class="toolbar" style="margin-top:16px"><button class="btn primary" onclick="addBrand('${view.category}')">＋ افزودن برند</button></div>`;return}
+ if(view.page==='products'){let b=decodeURIComponent(view.brand),ps=data.products.filter(p=>p.category===view.category&&p.brand===b);app.innerHTML=`<div class="topline"><button class="back" onclick="openCategory('${view.category}')">← برندها</button><span class="pill">${esc(b)}</span></div><h2>محصولات ${esc(b)}</h2><input class="search" placeholder="جست‌وجوی نام یا طعم محصول..." oninput="filterProducts(this.value)"><div id="productGrid" class="products">${productCards(ps)}</div><div class="toolbar" style="margin-top:16px"><button class="btn primary" onclick="openProductForm(null,'${view.category}','${encodeURIComponent(b)}')">＋ افزودن محصول</button></div>`;return}
+ if(view.page==='detail'){let p=data.products.find(x=>x.id===view.product);if(!p){goHome();return}app.innerHTML=`<div class="topline"><button class="back" onclick="openBrand('${encodeURIComponent(p.brand)}')">← بازگشت به محصولات</button></div><div class="detail">${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:`<div class="photo">عکسی ثبت نشده</div>`}<div class="detailcontent"><span class="pill">${esc(categoryName(p.category))} · ${esc(p.brand)}</span><h2 style="margin-top:12px">${esc(p.name)}</h2>${[['اندازه / وزن',p.size],['تعداد سروینگ',p.servings],['طعم',p.flavor],['قیمت',money(p.price)]].map(x=>`<div class="detailrow"><span>${x[0]}</span><strong>${esc(x[1]||'ثبت نشده')}</strong></div>`).join('')}<p class="hint" style="margin-top:14px">${esc(p.description||'توضیحی ثبت نشده است.')}</p><div class="toolbar"><button class="btn primary" onclick="addToCart('${p.id}')">🛒 افزودن به سبد خرید</button><button class="btn" onclick="openProductForm('${p.id}')">ویرایش محصول</button><button class="btn" onclick="deleteProduct('${p.id}')">حذف</button></div></div></div>`;return}
+
+ if(view.page==='cart'){
+  let items=Object.entries(cart).map(([id,qty])=>({p:data.products.find(x=>x.id===id),qty:Number(qty)})).filter(x=>x.p&&x.qty>0);
+  let total=items.reduce((sum,x)=>sum+(Number(x.p.price)||0)*x.qty,0);
+  app.innerHTML=`<div class="topline"><button class="back" onclick="goHome()">← ادامه مشاهده محصولات</button><span class="pill">${cartCount()} عدد</span></div><h2>سبد خرید مشتری</h2><p class="hint">تعداد هر محصول را با دکمه‌های مثبت و منفی تغییر دهید. جمع کل به‌صورت خودکار محاسبه می‌شود.</p>${items.length?items.map(({p,qty})=>`<div class="cartline">${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:`<div class="photo" style="height:72px;border-radius:9px">عکس</div>`}<div><h3>${esc(p.name)}</h3><div class="meta">${esc(p.brand)} · ${money(p.price)} برای هر عدد</div><div class="qtybox"><button onclick="changeQty('${p.id}',-1)">−</button><strong>${qty}</strong><button onclick="changeQty('${p.id}',1)">＋</button><button class="btn small" style="margin-right:auto;color:#ff7777" onclick="removeFromCart('${p.id}')">حذف</button></div><div class="price">جمع این ردیف: ${money((Number(p.price)||0)*qty)}</div></div></div>`).join('')+`<div class="totalbox"><span>جمع کل سبد خرید</span><strong>${money(total)}</strong></div><div class="toolbar" style="margin-top:15px"><button class="btn" onclick="clearCart()">خالی کردن سبد</button><button class="btn primary" onclick="copyOrder()">کپی خلاصه سفارش</button></div>`:`<div class="empty">سبد خرید هنوز خالی است.<br>از داخل دسته‌بندی‌ها محصولات موردنظر مشتری را اضافه کنید.</div>`}`;
+  return
+ }
+
+ if(view.page==='manageBrands'){app.innerHTML=`<div class="topline"><button class="back" onclick="goHome()">← صفحه اول</button></div><h2>مدیریت برندها</h2><p class="hint">می‌توانید نام برندها را اضافه یا حذف کنید. حذف برند، محصولات ثبت‌شده آن را حذف نمی‌کند.</p>${categories.map(c=>`<section style="margin:18px 0"><h2>${c.name}</h2><div class="brandlist">${(data.brands[c.id]||[]).map(b=>`<div class="brand">${esc(b)}<button class="btn small" style="float:left" onclick="removeBrand('${c.id}','${encodeURIComponent(b)}')">حذف برند</button></div>`).join('')}</div><button class="btn small" style="margin-top:9px" onclick="addBrand('${c.id}')">＋ افزودن برند</button></section>`).join('')}`;return}
+}
+
+function openCart(){view.page='cart';render()}
+function addToCart(id){
+ let p=data.products.find(x=>x.id===id);if(!p)return;
+ showModal(`<h2>افزودن به سبد خرید</h2><p class="hint">${esc(p.name)} · ${money(p.price)}</p><form onsubmit="confirmAddToCart(event,'${id}')"><div class="field"><label>تعداد دلخواه مشتری</label><input id="cartQty" type="number" min="1" step="1" value="${cart[id]||1}" required></div><div class="modalbuttons"><button class="btn primary" type="submit">افزودن به سبد</button><button class="btn" type="button" onclick="closeModal()">انصراف</button></div></form>`);
+}
+function confirmAddToCart(e,id){e.preventDefault();let qty=Math.max(1,parseInt(document.getElementById('cartQty').value,10)||1);cart[id]=(Number(cart[id])||0)+qty;saveCart();closeModal();updateCartBadge();alert('محصول به سبد خرید اضافه شد.')}
+function changeQty(id,delta){cart[id]=Math.max(0,(Number(cart[id])||0)+delta);if(!cart[id])delete cart[id];saveCart();render()}
+function removeFromCart(id){delete cart[id];saveCart();render()}
+function clearCart(){if(!confirm('سبد خرید کاملاً خالی شود؟'))return;cart={};saveCart();render()}
+function copyOrder(){
+ let items=Object.entries(cart).map(([id,qty])=>({p:data.products.find(x=>x.id===id),qty:Number(qty)})).filter(x=>x.p&&x.qty>0);
+ let total=items.reduce((sum,x)=>sum+(Number(x.p.price)||0)*x.qty,0);
+ let lines=['خلاصه سفارش مشتری',...items.map(x=>`${x.p.name} | ${x.qty} عدد | ${money(x.p.price)} | جمع: ${money((Number(x.p.price)||0)*x.qty)}`),`جمع کل: ${money(total)}`];
+ let txt=lines.join('\n');
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>alert('خلاصه سفارش کپی شد.')).catch(()=>prompt('خلاصه سفارش را کپی کنید:',txt))}else prompt('خلاصه سفارش را کپی کنید:',txt);
+}
+
+function categoryName(id){return categories.find(c=>c.id===id)?.name||''}
+function productCards(ps){if(!ps.length)return `<div class="empty" style="grid-column:1/-1">هنوز محصولی ثبت نشده است.<br>با دکمه «افزودن محصول» اولین محصول را اضافه کنید.</div>`;return ps.map(p=>`<article class="product"><div class="photo">${p.image?`<img src="${p.image}" alt="${esc(p.name)}">`:'عکس محصول'}</div><div class="pbody"><h3>${esc(p.name)}</h3><div class="meta">${esc(p.size||'وزن نامشخص')} · ${esc(p.flavor||'طعم نامشخص')}<br>${esc(p.servings||'')} سروینگ</div><div class="price">${money(p.price)}</div><div class="actions"><button class="btn small primary" onclick="openDetail('${p.id}')">مشاهده</button><button class="btn small" onclick="addToCart('${p.id}')">افزودن به سبد</button></div><div class="actions"><button class="btn small" onclick="openProductForm('${p.id}')">ویرایش محصول</button></div></div></article>`).join('')}
+function openCategory(id){view={page:'brands',category:id,brand:null,product:null};render()}
+function openBrand(b){view={page:'products',category:view.category,brand:b,product:null};render()}
+function openDetail(id){view.product=id;view.page='detail';render()}
+function filterProducts(q){let b=decodeURIComponent(view.brand),ps=data.products.filter(p=>p.category===view.category&&p.brand===b&&(`${p.name} ${p.flavor}`.toLowerCase().includes(q.toLowerCase())));document.getElementById('productGrid').innerHTML=productCards(ps)}
+function showModal(content){document.getElementById('modalBody').innerHTML=content;document.getElementById('modal').classList.add('show')}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function addBrand(cat){let name=prompt('نام برند جدید:');if(!name||!name.trim())return;if(!data.brands[cat])data.brands[cat]=[];if(!data.brands[cat].includes(name.trim()))data.brands[cat].push(name.trim());save();render()}
+function manageBrands(){view.page='manageBrands';render()}
+function removeBrand(cat,b){b=decodeURIComponent(b);if(!confirm('این برند از فهرست حذف شود؟'))return;data.brands[cat]=data.brands[cat].filter(x=>x!==b);save();render()}
+function openProductForm(id=null,cat=null,brand=null){
+ let p=id?data.products.find(x=>x.id===id):null;cat=p?.category||cat||view.category||'creatine';brand=p?.brand|| (brand?decodeURIComponent(brand):'');
+ const opts=(data.brands[cat]||[]).map(b=>`<option ${b===brand?'selected':''} value="${esc(b)}">${esc(b)}</option>`).join('');
+ showModal(`<h2>${p?'ویرایش محصول':'افزودن محصول'}</h2><form id="productForm" onsubmit="submitProduct(event,'${id||''}')">
+ <div class="field"><label>دسته‌بندی</label><select id="fcat" onchange="updateBrandOptions()">${categories.map(c=>`<option value="${c.id}" ${cat===c.id?'selected':''}>${c.name}</option>`).join('')}</select></div>
+ <div class="field"><label>برند</label><select id="fbrand">${opts}</select></div>
+ <div class="field"><label>نام محصول / مدل *</label><input id="fname" required value="${esc(p?.name||'')}" placeholder="مثلاً Creatine Monohydrate"></div>
+ <div class="two"><div class="field"><label>اندازه / وزن</label><input id="fsize" value="${esc(p?.size||'')}" placeholder="مثلاً 300 گرم"></div><div class="field"><label>تعداد سروینگ</label><input id="fservings" value="${esc(p?.servings||'')}" placeholder="مثلاً 60"></div></div>
+ <div class="two"><div class="field"><label>طعم</label><input id="fflavor" value="${esc(p?.flavor||'')}" placeholder="مثلاً بدون طعم"></div><div class="field"><label>قیمت (تومان)</label><input id="fprice" type="number" min="0" value="${esc(p?.price||'')}" placeholder="مثلاً 2500000"></div></div>
+ <div class="field"><label>توضیحات</label><textarea id="fdesc" placeholder="توضیحات محصول...">${esc(p?.description||'')}</textarea></div>
+ <div class="field"><label>عکس محصول از گالری یا دوربین</label><input id="fimage" type="file" accept="image/*" capture="environment" onchange="previewImage(event)"><img id="imgPreview" class="preview" ${p?.image?`src="${p.image}" style="display:block"`:''}></div>
+ <div class="modalbuttons"><button class="btn primary" type="submit">ذخیره محصول</button><button class="btn" type="button" onclick="closeModal()">انصراف</button></div></form>`);
+ window.currentImage=p?.image||'';
+}
+function updateBrandOptions(){let cat=document.getElementById('fcat').value,sel=document.getElementById('fbrand');sel.innerHTML=(data.brands[cat]||[]).map(b=>`<option value="${esc(b)}">${esc(b)}</option>`).join('')}
+function previewImage(e){let file=e.target.files[0];if(!file)return;let reader=new FileReader();reader.onload=()=>{let img=new Image();img.onload=()=>{let canvas=document.createElement('canvas'),max=900,scale=Math.min(1,max/Math.max(img.width,img.height));canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);window.currentImage=canvas.toDataURL('image/jpeg',.78);let prev=document.getElementById('imgPreview');prev.src=window.currentImage;prev.style.display='block'};img.src=reader.result};reader.readAsDataURL(file)}
+function submitProduct(e,id){e.preventDefault();let cat=document.getElementById('fcat').value,brand=document.getElementById('fbrand').value,name=document.getElementById('fname').value.trim();if(!brand){alert('ابتدا برای این دسته یک برند اضافه کنید.');return}let p={id:id||('p'+Date.now()),category:cat,brand,name,size:document.getElementById('fsize').value.trim(),servings:document.getElementById('fservings').value.trim(),flavor:document.getElementById('fflavor').value.trim(),price:document.getElementById('fprice').value,description:document.getElementById('fdesc').value.trim(),image:window.currentImage||''};if(id){let i=data.products.findIndex(x=>x.id===id);data.products[i]=p}else data.products.push(p);if(!data.brands[cat].includes(brand))data.brands[cat].push(brand);save();closeModal();view={page:'products',category:cat,brand:encodeURIComponent(brand),product:null};render()}
+function deleteProduct(id){if(!confirm('این محصول حذف شود؟'))return;data.products=data.products.filter(p=>p.id!==id);save();openBrand(view.brand)}
+function backup(){let blob=new Blob([JSON.stringify({catalog:data,cart})],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='backup-catalog-mokamelat.json';a.click();URL.revokeObjectURL(url)}
+function restore(e){let file=e.target.files[0];if(!file)return;let r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(d.catalog&&d.catalog.brands&&d.catalog.products){data=d.catalog;cart=d.cart||{}}else if(d.brands&&d.products){data=d;cart={}}else throw 0;save();saveCart();goHome();alert('اطلاعات بازیابی شد.')}catch(_){alert('فایل پشتیبان معتبر نیست.')}};r.readAsText(file)}
+render();
+</script>
+</body></html>
