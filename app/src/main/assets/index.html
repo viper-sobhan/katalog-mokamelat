@@ -150,7 +150,23 @@ function updateBrandOptions(){let cat=document.getElementById('fcat').value,sel=
 function previewImage(e){let file=e.target.files[0];if(!file)return;let reader=new FileReader();reader.onload=()=>{let img=new Image();img.onload=()=>{let canvas=document.createElement('canvas'),max=900,scale=Math.min(1,max/Math.max(img.width,img.height));canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);window.currentImage=canvas.toDataURL('image/jpeg',.78);let prev=document.getElementById('imgPreview');prev.src=window.currentImage;prev.style.display='block'};img.src=reader.result};reader.readAsDataURL(file)}
 function submitProduct(e,id){e.preventDefault();let cat=document.getElementById('fcat').value,brand=document.getElementById('fbrand').value,name=document.getElementById('fname').value.trim();if(!brand){alert('ابتدا برای این دسته یک برند اضافه کنید.');return}let p={id:id||('p'+Date.now()),category:cat,brand,name,size:document.getElementById('fsize').value.trim(),servings:document.getElementById('fservings').value.trim(),flavor:document.getElementById('fflavor').value.trim(),price:document.getElementById('fprice').value,description:document.getElementById('fdesc').value.trim(),image:window.currentImage||''};if(id){let i=data.products.findIndex(x=>x.id===id);data.products[i]=p}else data.products.push(p);if(!data.brands[cat].includes(brand))data.brands[cat].push(brand);save();closeModal();view={page:'products',category:cat,brand:encodeURIComponent(brand),product:null};render()}
 function deleteProduct(id){if(!confirm('این محصول حذف شود؟'))return;data.products=data.products.filter(p=>p.id!==id);save();openBrand(view.brand)}
-function backup(){let blob=new Blob([JSON.stringify({catalog:data,cart})],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='backup-catalog-mokamelat.json';a.click();URL.revokeObjectURL(url)}
+function backup(){
+  const json = JSON.stringify({catalog:data, cart});
+
+  if (window.Android && typeof window.Android.saveBackup === 'function') {
+    window.Android.saveBackup(json);
+  } else {
+    const blob = new Blob([json], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+
+    a.href = url;
+    a.download = 'backup-catalog-mokamelat.json';
+    a.click();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+}
 function restore(e){let file=e.target.files[0];if(!file)return;let r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(d.catalog&&d.catalog.brands&&d.catalog.products){data=d.catalog;cart=d.cart||{}}else if(d.brands&&d.products){data=d;cart={}}else throw 0;save();saveCart();goHome();alert('اطلاعات بازیابی شد.')}catch(_){alert('فایل پشتیبان معتبر نیست.')}};r.readAsText(file)}
 render();
 </script>
