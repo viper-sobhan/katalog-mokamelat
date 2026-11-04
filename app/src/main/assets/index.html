@@ -60,6 +60,7 @@ body[data-cat="gainer"] .mark{background:linear-gradient(135deg,#ff766c,#a51f29)
 @media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}.brandlist{grid-template-columns:repeat(3,1fr)}.products{grid-template-columns:repeat(3,1fr)}.photo{height:190px}.modal{align-items:center}}
 @media(max-width:360px){.grid,.brandlist,.products{grid-template-columns:1fr}.photo{height:190px}.two{grid-template-columns:1fr}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <header><div class="head"><div class="logo"><div class="mark">✦</div><div><h1>کاتالوگ مکمل‌ها</h1><div class="sub">راهنمای محصولات و برندها</div></div></div><div style="display:flex;gap:7px;align-items:center"><button class="btn small" onclick="openCart()">🛒 سبد خرید <span id="cartCount" class="pill" style="margin-right:4px">0</span></button><button class="btn small" onclick="goHome()">صفحه اول</button></div></div></header>
