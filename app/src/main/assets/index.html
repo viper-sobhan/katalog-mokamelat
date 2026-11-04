@@ -68,6 +68,13 @@ body[data-cat="gainer"] .mark{background:linear-gradient(135deg,#ff766c,#a51f29)
 <footer>اطلاعات و عکس محصولات را خودتان اضافه و ویرایش کنید. اطلاعات این کاتالوگ روی همین مرورگر و همین دستگاه ذخیره می‌شود؛ برای انتقال به گوشی دیگر از «خروجی پشتیبان» استفاده کنید.</footer>
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="sheet" id="modalBody"></div></div>
 <script>
+ const SUPABASE_URL = 'https://vavgxwumvpzxaolrqfqv.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_J9PcgnIRThk48qtIgJikxg_MmsfrkVR';
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 const categories=[{id:'creatine',name:'کراتین‌ها',icon:'⚡'},{id:'protein',name:'پروتئین‌ها',icon:'🥛'},{id:'gainer',name:'گینرها',icon:'💪'}];
 const starterBrands={creatine:['Zoomad Labs','Optimum Nutrition (ON)','MuscleTech','Rule One'],protein:['Optimum Nutrition (ON)','Dymatize','MuscleTech','Rule One','BSN','Applied Nutrition'],gainer:['Optimum Nutrition (ON)','Mutant','MuscleTech','BSN','Dymatize']};
 let data={brands:starterBrands,products:[]};let cart={};let view={page:'home',category:null,brand:null,product:null};
